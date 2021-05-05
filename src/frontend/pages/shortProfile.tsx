@@ -8,7 +8,7 @@ export default function ShortProfile({ route, navigation }) {
 		<Container>
 			<RowProfile>
 				<ColProfile>
-					<Profile navigation={navigation} route={route} />
+					<Profile navigation={navigation} route={route}/>
 				</ColProfile>
 			</RowProfile>
 		</Container>

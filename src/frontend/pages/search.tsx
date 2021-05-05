@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, Keyboard, Platform } from 'react-native';
+import {
+	ActivityIndicator,
+	Alert,
+	FlatList,
+	Keyboard,
+	Platform,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import api from '../../backend/services/api';
-import { GetAllUser, SetUser } from '../../backend/database';
 import Colors from '../styles/colors';
 import { FontAwesome5 } from '@expo/vector-icons';
 import {
@@ -11,9 +16,11 @@ import {
 	InputSearch,
 	RowSearch,
 	HeighSearch,
+	ColRecents,
 	RowRecents,
 	ButtonRecents,
 	TextRecents,
+	ListTitle,
 } from '../styles/styleSearch';
 
 export default function Search() {
@@ -21,6 +28,8 @@ export default function Search() {
 	const [loadingSearch, setLoadingSearch] = useState(false);
 	const [loadingRecents, setLoadingRecents] = useState(false);
 	const [input, setInput] = useState('');
+	const [listUser, setListUser] = useState<string[]>([]);
+	const [surveyed, setSurveyed] = useState(false);
 
 	useEffect(() => {
 		setTimeout(() => Alert.alert('Seja bem vindo ao SearchGithub!'), 1000);
@@ -47,28 +56,20 @@ export default function Search() {
 		};
 	};
 
-	const submit = async () => {
-		if (input) {
-			setLoadingSearch(true);
+	const submit = async (user: string) => {
+		try {
+			const resRepo = await api.get(`users/${user}/repos`);
+			const resUser = await api.get(`users/${user}`);
 
-			try {
-				const resRepo = await api.get(`users/${input}/repos`);
-				const resUser = await api.get(`users/${input}`);
+			const repos_url = resRepo.data;
+			const userClean = cleanUser(resUser.data);
+			const userSearch = { ...userClean, repos_url };
 
-				const repos_url = resRepo.data;
-				const userClean = cleanUser(resUser.data);
-				const user = { ...userClean, repos_url };
-
-				await SetUser(user);
-
-				navigation.navigate('ShortProfile', { user: user });
-				Keyboard.dismiss();
-
-			} catch (e) {
-				Alert.alert('Usuário não encontrado!');
-			}
-		} else alert('Usuário não pode estar vazio!');
-		setLoadingSearch(false);
+			navigation.navigate('ShortProfile', { user: userSearch });
+			Keyboard.dismiss();
+		} catch (e) {
+			Alert.alert('Usuário não encontrado!');
+		}
 	};
 
 	return (
@@ -77,7 +78,7 @@ export default function Search() {
 				<HeighSearch>
 					<InputSearch
 						value={input}
-						placeholder="search a profile"
+						placeholder="Digite o nome do usuario..."
 						placeholderTextColor={Colors.blue3}
 						onChangeText={setInput}
 						style={{
@@ -92,7 +93,17 @@ export default function Search() {
 					<ButtonSearch
 						disable={loadingSearch}
 						activeOpacity={0.6}
-						onPress={() => submit()}
+						onPress={() => {
+							if (input) {
+								setSurveyed(true);
+								setLoadingSearch(true);
+								submit(input);
+								if (listUser.indexOf(input) === -1)
+									listUser.push(input);
+								setLoadingSearch(false);
+								setInput('');
+							}else alert('Usuário não pode estar vazio!');
+						}}
 					>
 						{loadingSearch ? (
 							<ActivityIndicator color={Colors.white} />
@@ -107,23 +118,42 @@ export default function Search() {
 				</HeighSearch>
 			</RowSearch>
 
-			<ButtonRecents
-				disable={loadingRecents}
-				activeOpacity={0.6}
-				onPress={() => {
-					const users = async () => await GetAllUser();
-					navigation.navigate('RecentProfiles', { users });
-				}}
-			>
+			<ColRecents>
 				<RowRecents>
-					<TextRecents>Consultados</TextRecents>
-					<FontAwesome5
-						name="search"
-						color={Colors.white}
-						style={{ fontSize: 20 }}
+					{surveyed ? (
+						<ListTitle>
+							<TextRecents style={{ color: Colors.blue5 }}>
+								Visitados
+							</TextRecents>
+							<FontAwesome5
+								name="search"
+								color={Colors.blue5}
+								style={{ fontSize: 20 }}
+							/>
+						</ListTitle>
+					) : (
+						<></>
+					)}
+				</RowRecents>
+				<RowRecents>
+					<FlatList
+						style={{ width: '100%', marginTop: 10 }}
+						data={listUser}
+						keyExtractor={(item) => String(item)}
+						horizontal={true}
+						showsHorizontalScrollIndicator={true}
+						renderItem={({ item }) => (
+							<ButtonRecents
+								disable={loadingRecents}
+								activeOpacity={0.6}
+								onPress={() => submit(item)}
+							>
+								<TextRecents>{item}</TextRecents>
+							</ButtonRecents>
+						)}
 					/>
 				</RowRecents>
-			</ButtonRecents>
+			</ColRecents>
 		</Container>
 	);
 }

@@ -40,11 +40,34 @@ export const ButtonSearch = styled.TouchableOpacity`
 	justify-content: center;
 `;
 
-export const RowRecents = styled.View`
-	flex-direction: row;
-	justify-content: space-around;
-	align-items: center;
+export const ColRecents = styled.View`
 	width: 100%;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`;
+
+export const RowRecents = styled.View`
+	width: 100%;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+`;
+
+export const ListTitle = styled.View`
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-top: 10px;
+	width: 100%;
+	padding: 4px;
+`;
+
+export const TextRecents = styled.Text`
+	color: #ffffff;
+	font-weight: bold;
+	margin-right: 10px;
+	font-size: 20px;
 `;
 
 export const ButtonRecents = styled.TouchableOpacity`
@@ -54,11 +77,5 @@ export const ButtonRecents = styled.TouchableOpacity`
 	align-items: center;
 	justify-content: center;
 	border-radius: 100px;
-`;
-
-export const TextRecents = styled.Text`
-	color: #ffffff;
-	font-weight: bold;
-	margin-right: 10px;
-	font-size: 20px;
+	margin: 0 5px 10px;
 `;

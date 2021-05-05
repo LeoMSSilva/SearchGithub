@@ -6,7 +6,6 @@ import { Entypo } from '@expo/vector-icons';
 import Search from '../../frontend/pages/search';
 import FullProfile from '../../frontend/pages/fullProfile';
 import ShortProfile from '../../frontend/pages/shortProfile';
-import RecentProfiles from '../../frontend/pages/recentProfiles';
 
 const stackRoutes = createStackNavigator();
 
@@ -32,7 +31,6 @@ const AppRoutes: React.FC = () => (
 		<stackRoutes.Screen name="Search" component={Search} />
 		<stackRoutes.Screen name="ShortProfile" component={ShortProfile} />
 		<stackRoutes.Screen name="FullProfile" component={FullProfile} />
-		<stackRoutes.Screen name="RecentProfiles" component={RecentProfiles} />
 	</stackRoutes.Navigator>
 );
 

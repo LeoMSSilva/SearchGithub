@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Colors from '../../frontend/styles/colors';
 import { Entypo } from '@expo/vector-icons';
+import Colors from '../../frontend/styles/colors';
 
 import Search from '../../frontend/pages/search';
 import FullProfile from '../../frontend/pages/fullProfile';

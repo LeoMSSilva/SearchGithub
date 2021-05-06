@@ -29,13 +29,17 @@ export default function Repository({
 	updated_at,
 	user,
 }: IRepository) {
+
 	Moment.locale('pt-br');
+
 	const [useDescription, setUseDescription] = useState(true);
 	const [useLanguage, setUseLanguage] = useState(true);
+
 	useEffect(() => {
 		description ? setUseDescription(true) : setUseDescription(false);
 		language ? setUseLanguage(true) : setUseLanguage(false);
 	});
+	
 	return (
 		<Container>
 			<TouchableOpacity

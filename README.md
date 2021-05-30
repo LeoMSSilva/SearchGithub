@@ -51,6 +51,7 @@ This app is used to search for users on github.
 - [Node.js](https://pt-br.nodejs.org/) (required)
 - [Yarn](https://yarnpkg.com/) (optional)
 - [Expo](https://expo.io/) (required)
+
   **Then in order, clone the project.**
 
 By HTTPS, running this command:

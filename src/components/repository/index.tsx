@@ -10,7 +10,7 @@ import {
 	Language,
 	Created,
 	Uploaded,
-} from '../styles/styleRepository';
+} from './styles';
 
 interface IRepository {
 	name: string;
@@ -29,7 +29,6 @@ export default function Repository({
 	updated_at,
 	user,
 }: IRepository) {
-
 	Moment.locale('pt-br');
 
 	const [useDescription, setUseDescription] = useState(true);
@@ -39,7 +38,7 @@ export default function Repository({
 		description ? setUseDescription(true) : setUseDescription(false);
 		language ? setUseLanguage(true) : setUseLanguage(false);
 	});
-	
+
 	return (
 		<Container>
 			<TouchableOpacity

@@ -7,8 +7,8 @@ import {
 	Platform,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import api from '../../backend/services/api';
-import Colors from '../styles/colors';
+import api from '../../services/api';
+import Colors from '../../styles/colors';
 import { FontAwesome5 } from '@expo/vector-icons';
 import {
 	ButtonSearch,
@@ -21,7 +21,7 @@ import {
 	ButtonRecents,
 	TextRecents,
 	ListTitle,
-} from '../styles/styleSearch';
+} from './styles';
 
 export default function Search() {
 	const navigation = useNavigation();
@@ -36,15 +36,8 @@ export default function Search() {
 	}, []);
 
 	const cleanUser = (user: any) => {
-		const {
-			avatar_url,
-			name,
-			login,
-			location,
-			id,
-			followers,
-			public_repos,
-		} = user;
+		const { avatar_url, name, login, location, id, followers, public_repos } =
+			user;
 		return {
 			avatar_url,
 			name,
@@ -98,11 +91,10 @@ export default function Search() {
 								setSurveyed(true);
 								setLoadingSearch(true);
 								submit(input);
-								if (listUser.indexOf(input) === -1)
-									listUser.push(input);
+								if (listUser.indexOf(input) === -1) listUser.push(input);
 								setLoadingSearch(false);
 								setInput('');
-							}else alert('Usuário não pode estar vazio!');
+							} else alert('Usuário não pode estar vazio!');
 						}}
 					>
 						{loadingSearch ? (

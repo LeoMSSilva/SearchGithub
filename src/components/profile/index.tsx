@@ -1,5 +1,5 @@
 import React from 'react';
-import Colors from '../styles/colors';
+import Colors from '../../styles/colors';
 import { Entypo, FontAwesome5 } from '@expo/vector-icons';
 import {
 	Address,
@@ -8,7 +8,7 @@ import {
 	Row,
 	ButtonImageProfile,
 	User,
-} from '../styles/styleProfile';
+} from './styles';
 
 // @ts-ignore
 export default function Profile({ navigation, route }) {

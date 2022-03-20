@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import Colors from '../styles/colors';
-import Repository from '../components/repository';
+import Colors from '../../styles/colors';
+import Repository from '../../components/repository';
 import {
 	Entypo,
 	FontAwesome5,
@@ -19,7 +19,7 @@ import {
 	Row,
 	ViewImageProfile,
 	User,
-} from '../styles/styleProfile';
+} from '../../components/profile/styles';
 
 // @ts-ignore
 export default function FullProfile({ route }) {

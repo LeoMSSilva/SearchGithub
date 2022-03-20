@@ -1,11 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Entypo } from '@expo/vector-icons';
-import Colors from '../../frontend/styles/colors';
-
-import Search from '../../frontend/pages/search';
-import FullProfile from '../../frontend/pages/fullProfile';
-import ShortProfile from '../../frontend/pages/shortProfile';
+import Colors from '../styles/colors';
+import Search from '../pages/search';
+import FullProfile from '../pages/fullProfile';
+import ShortProfile from '../pages/shortProfile';
 
 const stackRoutes = createStackNavigator();
 

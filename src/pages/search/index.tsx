@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {
-	ActivityIndicator,
-	Alert,
-	FlatList,
-	Keyboard,
-	Platform,
-} from 'react-native';
+import { ActivityIndicator, Alert, FlatList, Keyboard } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import api from '../../services/api';
-import Colors from '../../styles/colors';
+import api from '@services/api';
+import Colors from '@styles/colors';
 import { FontAwesome5 } from '@expo/vector-icons';
 import {
 	ButtonSearch,
@@ -74,13 +68,6 @@ export default function Search() {
 						placeholder="Digite o nome do usuario..."
 						placeholderTextColor={Colors.blue3}
 						onChangeText={setInput}
-						style={{
-							...Platform.select({
-								web: {
-									outline: 'none',
-								},
-							}),
-						}}
 					/>
 
 					<ButtonSearch

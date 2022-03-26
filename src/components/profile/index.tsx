@@ -1,5 +1,5 @@
 import React from 'react';
-import Colors from '../../styles/colors';
+import Colors from '@styles/colors';
 import { Entypo, FontAwesome5 } from '@expo/vector-icons';
 import {
 	Address,
@@ -10,7 +10,6 @@ import {
 	User,
 } from './styles';
 
-// @ts-ignore
 export default function Profile({ navigation, route }) {
 	const { avatar_url, name, login, location } = route.params.user;
 	return (

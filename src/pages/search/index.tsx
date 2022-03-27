@@ -71,7 +71,7 @@ export default function Search() {
 					/>
 
 					<ButtonSearch
-						disable={loadingSearch}
+						disabled={loadingSearch}
 						activeOpacity={0.6}
 						onPress={() => {
 							if (input) {
@@ -123,7 +123,7 @@ export default function Search() {
 						showsHorizontalScrollIndicator={true}
 						renderItem={({ item }) => (
 							<ButtonRecents
-								disable={loadingRecents}
+								disabled={loadingRecents}
 								activeOpacity={0.6}
 								onPress={() => submit(item)}
 							>
